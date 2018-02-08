@@ -66,14 +66,14 @@ def train(BATCH_SIZE, X_train):
             d.trainable = False
             g_loss = d_on_g.train_on_batch(noise, np.array([1] * BATCH_SIZE))
             d.trainable = True
-        g.save_weights('generator', True)
-        d.save_weights('discriminator', True)
+        g.save_weights('assets/generator', True)
+        d.save_weights('assets/discriminator', True)
     return d, g
 
 
 def generate(BATCH_SIZE):
     g = generator_model()
-    g.load_weights('generator')
+    g.load_weights('assets/generator')
     noise = np.random.uniform(0, 1, (BATCH_SIZE, 100))
     generated_images = g.predict(noise)
     return generated_images
@@ -83,14 +83,14 @@ def sum_of_residual(y_true, y_pred):
 
 def feature_extractor():
     d = discriminator_model()
-    d.load_weights('discriminator') 
+    d.load_weights('assets/discriminator') 
     intermidiate_model = Model(inputs=d.layers[0].input, outputs=d.layers[-5].output)
     intermidiate_model.compile(loss='binary_crossentropy', optimizer='adam')
     return intermidiate_model
 
 def anomaly_detector():
     g = generator_model()
-    g.load_weights('generator')
+    g.load_weights('assets/generator')
     g.trainable = False
     intermidiate_model = feature_extractor()
     intermidiate_model.trainable = False
