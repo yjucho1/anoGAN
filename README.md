@@ -23,8 +23,6 @@ X_train = X_train.reshape(60000, 28, 28, 1)
 Model_d, Model_g = anogan.train(32, X_train)
 ```
 
-    /Users/jyj0729/anaconda2/envs/tf/lib/python2.7/site-packages/h5py/__init__.py:36: FutureWarning: Conversion of the second argument of issubdtype from `float` to `np.floating` is deprecated. In future, it will be treated as `np.float64 == np.dtype(float).type`.
-      from ._conv import register_converters as _register_converters
     Using TensorFlow backend.
 
 
@@ -82,7 +80,7 @@ Model_d, Model_g = anogan.train(32, X_train)
 
 
 ```python
-## generate random image 
+## generate random normal image 
 
 generated_img = anogan.generate(3)
 plt.figure(figsize=(2, 2))
